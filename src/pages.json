@@ -1,16 +1,62 @@
 {
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
-			"path": "pages/index/index",
-			"style": {
-				"navigationBarTitleText": "uni-app"
-			}
-		}
-	],
-	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
-	}
+  "pages": [
+  	{
+      "path": "pages/home/index",
+      "style": {
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/finance/index"
+    },
+    {
+      "path": "pages/insure/index"
+    },
+    {
+      "path": "pages/my/main/index"
+    },
+    {
+      "path": "pages/my/person/index"
+    },
+    {
+      "path": "pages/login/index"
+    }
+  ],
+  "globalStyle": {
+  	"navigationBarTextStyle": "black",
+  	"navigationBarTitleText": "我的小程序",
+  	"navigationBarBackgroundColor": "#F8F8F8",
+  	"backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#909090",
+    "selectedColor": "#ff5050",
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "text": "首页",
+        "iconPath": "static/tabbar/tab_ic_home_nor.png",
+        "selectedIconPath": "static/tabbar/tab_ic_home_pre.png"
+      },
+      {
+        "pagePath": "pages/finance/index",
+        "text": "金融",
+        "iconPath": "static/tabbar/tab_ic_finance_nor.png",
+        "selectedIconPath": "static/tabbar/tab_ic_finance_pre.png"
+      },
+      {
+        "pagePath": "pages/insure/index",
+        "text": "保险",
+        "iconPath": "static/tabbar/tab_ic_bx_nor.png",
+        "selectedIconPath": "static/tabbar/tab_ic_bx_pre.png"
+      },
+      {
+        "pagePath": "pages/my/main/index",
+        "text": "我的",
+        "iconPath": "static/tabbar/tab_ic_me_nor.png",
+        "selectedIconPath": "static/tabbar/tab_ic_me_pre.png"
+      }
+    ]
+  }
 }
