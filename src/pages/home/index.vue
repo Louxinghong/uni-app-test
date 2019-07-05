@@ -11,15 +11,21 @@
         </swiper>
       </uni-swiper-dot>
     </view>
+    <view>
+      <uni-swipe-action @click="bindClick" :options="options">
+        <view class='cont'>SwipeAction 基础使用场景</view>
+      </uni-swipe-action>
+    </view>
   </view>
 </template>
 
 <script>
-import { uniSwiperDot } from '@dcloudio/uni-ui'
-import { setTimeout } from 'timers';
+import { uniSwiperDot, uniSwipeAction } from '@dcloudio/uni-ui'
+import { setTimeout } from 'timers'
 export default {
   components: {
-    uniSwiperDot
+    uniSwiperDot,
+    uniSwipeAction
   },
   data() {
   	return {
@@ -37,6 +43,20 @@ export default {
       ],
       current: 0,
       mode: 'long',
+      options: [
+        {
+          text: '取消',
+          style: {
+            backgroundColor: '#007aff'
+          }
+        },
+        {
+          text: '确认',
+          style: {
+            backgroundColor: '#dd524d'
+          }
+        }
+      ]
   	}
   },
   onLoad(options) {
@@ -50,6 +70,12 @@ export default {
   methods: {
     change(e) {
       this.current = e.detail.current
+    },
+    bindClick(e) {
+      if(e.text === '确认'){
+        alert('123')
+      }
+        
     }
   }
 }
