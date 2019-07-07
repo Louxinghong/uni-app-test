@@ -13,7 +13,7 @@
     </view>
     <view>
       <uni-swipe-action @click="bindClick" :options="options">
-        <view class='cont'>SwipeAction 基础使用场景</view>
+        <view class='cont'>向左滑动以查看效果</view>
       </uni-swipe-action>
     </view>
   </view>
@@ -82,17 +82,12 @@ export default {
 </script>
 
 <style>
-  .content {
-  	text-align: center;
-  	height: 300upx;
-  }
-
-  .image-list {
-    width: 100%;
-  }
-  .img-content {
-    height: 300upx;
-    width: 95%;
-  }
+.image-list {
+  width: 100%;
+}
+.img-content {
+  height: 300upx;
+  width: 95%;
+}
 
 </style>
