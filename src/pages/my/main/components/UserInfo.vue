@@ -1,9 +1,15 @@
 <template>
   <view class="user-info">
+    <view class="person-info">
+      <view class="per-con">
+        <img class="person-img" src="/static/tabbar/tab_ic_me_nor.png" alt="">
+        <span v-if="!isLogin">未登录，请点击下方登录按钮前往登录</span>
+        <span v-else>欢迎，{{ username }}</span>
+      </view>
+    </view>
     <view class="content">
       <template v-if="!isLogin">
         <button class="login-btn" @click="onLogin">立即登录</button>
-        <text class="login-txt">您还未登录</text>
       </template>
       <template v-else-if="!isApply"> 
         <button class="apply-btn" @click="onApply">立即申请</button>
@@ -40,19 +46,21 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data() {
     return {
-      isLogin: false,
       isApply: false
     }
+  },
+  computed: {
+    ...mapState('login', ['username', 'isLogin'])
   },
   methods: {
     onLogin() {
       uni.navigateTo({
         url: '/pages/login/index'
       })
-      this.isLogin = true
     },
     onApply() {
       this.isApply = true
@@ -72,19 +80,48 @@ export default {
   display: flex;
   flex-flow: column nowrap;
 
+  .person-info {
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+    height: 270upx;
+    flex-flow: row nowrap;
+    align-items: baseline;
+    background: crimson;
+    color: white;
+    font-size: 25upx;
+
+    .per-con {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      margin-top: 30upx;
+      margin-left: 40upx;
+      .person-img {
+        width: 62upx;
+        height: 62upx;
+        margin-right: 20upx;
+      }
+    }
+    
+  }
+
   .content {
-    position: relative;
+    position: absolute;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
     width: 688upx;
     height: 258upx;
-    margin: 36upx auto 20upx;
+    margin-top: 120upx;
+    margin-bottom: 20upx;
     background: linear-gradient(to right, #fc9343, #fc5d55);
     box-shadow: 0upx 10upx 16upx 0upx rgba(252, 121, 65, 0.4);
     border-radius: 8upx;
-    
+    left: 50%;
+    transform: translateX(-50%);
+
     .login-btn,
     .apply-btn {
       width: 230upx;
@@ -155,6 +192,7 @@ export default {
     display: flex;
     justify-content: space-between;
     padding: 55upx 65upx 45upx;
+    margin-top: 100upx;
 
     .footer-item {
       image {

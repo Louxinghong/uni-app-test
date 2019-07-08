@@ -11,7 +11,8 @@
         </swiper>
       </uni-swiper-dot>
     </view>
-    <view>
+    
+    <view class="cont-content">
       <uni-swipe-action @click="bindClick" :options="options">
         <view class='cont'>向左滑动以查看效果</view>
       </uni-swipe-action>
@@ -84,10 +85,14 @@ export default {
 <style>
 .image-list {
   width: 100%;
+  text-align: center;
 }
 .img-content {
   height: 300upx;
   width: 95%;
 }
 
+.cont-content {
+  margin-top: 20upx;
+}
 </style>

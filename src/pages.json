@@ -7,19 +7,36 @@
       }
     },
     {
-      "path": "pages/finance/index"
+      "path": "pages/finance/index",
+      "style": {
+        "navigationBarTitleText": ""
+      }
     },
     {
-      "path": "pages/insure/index"
+      "path": "pages/insure/index",
+      "style": {
+        "navigationBarTitleText": ""
+      }
     },
     {
-      "path": "pages/my/main/index"
+      "path": "pages/my/main/index",
+      "style": {
+        "navigationBarTitleText": "个人页面"
+      }
     },
     {
-      "path": "pages/my/person/index"
+      "path": "pages/my/person/index",
+      "style": {
+        "navigationBarTitleText": "个人信息"
+      }
     },
     {
-      "path": "pages/login/index"
+      "path": "pages/login/index",
+      "style": {
+        "navigationBarTitleText": "登录",
+        "navigationBarBackgroundColor": "#5CACEE",
+        "navigationBarTextStyle": "white"
+      }
     }
   ],
   "globalStyle": {
