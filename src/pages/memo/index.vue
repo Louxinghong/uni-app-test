@@ -1,6 +1,5 @@
 <template>
   <view>
-    <h3>我的金融页面</h3>
     <view>
       <uni-calendar lunar @change="change" @to-click="toClick"></uni-calendar>
     </view>

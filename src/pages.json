@@ -3,19 +3,20 @@
   	{
       "path": "pages/home/index",
       "style": {
-        "enablePullDownRefresh": true
+        "enablePullDownRefresh": true,
+        "navigationBarTitleText": "首页新闻"
       }
     },
     {
-      "path": "pages/finance/index",
+      "path": "pages/team/index",
       "style": {
-        "navigationBarTitleText": ""
+        "navigationBarTitleText": "球队信息"
       }
     },
     {
-      "path": "pages/insure/index",
+      "path": "pages/memo/index",
       "style": {
-        "navigationBarTitleText": ""
+        "navigationBarTitleText": "备忘信息"
       }
     },
     {
@@ -57,14 +58,14 @@
         "selectedIconPath": "static/tabbar/tab_ic_home_pre.png"
       },
       {
-        "pagePath": "pages/finance/index",
-        "text": "金融",
+        "pagePath": "pages/team/index",
+        "text": "球队",
         "iconPath": "static/tabbar/tab_ic_finance_nor.png",
         "selectedIconPath": "static/tabbar/tab_ic_finance_pre.png"
       },
       {
-        "pagePath": "pages/insure/index",
-        "text": "保险",
+        "pagePath": "pages/memo/index",
+        "text": "备忘",
         "iconPath": "static/tabbar/tab_ic_bx_nor.png",
         "selectedIconPath": "static/tabbar/tab_ic_bx_pre.png"
       },
