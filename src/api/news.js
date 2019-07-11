@@ -5,3 +5,6 @@ import ajax from '@/utils/ajax'
  */
 export const getNews = data =>
   ajax('http://jsonplaceholder.typicode.com/posts', 'get', data)
+
+export const getHupuNews = data =>
+  ajax('http://route.showapi.com/967-1', 'get', data)

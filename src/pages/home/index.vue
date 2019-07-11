@@ -18,26 +18,46 @@
       </uni-swipe-action>
     </view>
 
-    <input type="text" v-model="chooseNum">
-    <button type="primary" @click="getThisNews(chooseNum)">搜索</button>
-    <text class="cricle-content" v-for="(item, index) in newList" :key="index">
-      {{ item.title.slice(0,30) }}...
-      <br>
-    </text>
+    <input class="search-content" type="text" v-model="chooseNum" placeholder="请输入要查找的ID">
+    <button class="search-btn" type="primary" @click="getThisNews(chooseNum)">搜索</button>
+
+    <uni-card
+      class="article-card"
+      v-for="(item, index) in newList"
+      :title="item.title" 
+      thumbnail="http://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" 
+      :extra="getNowDate"
+      :note="username"
+      :key="index"
+    >
+      <text class="article-content">
+        {{ item.body }}
+      </text>
+    </uni-card>
   </view>
 </template>
 
 <script>
-import { uniSwiperDot, uniSwipeAction } from '@dcloudio/uni-ui'
+import { uniSwiperDot, uniSwipeAction, uniCard } from '@dcloudio/uni-ui'
 import { setTimeout } from 'timers'
 import { getNews } from '@/api/news'
+import { mapState } from   'vuex'
 
 export default {
   components: {
     uniSwiperDot,
-    uniSwipeAction
+    uniSwipeAction,
+    uniCard
+  },
+  computed: {
+    ...mapState('login',['username']),
+    getNowDate() {
+      const { year, month, day} = this.nowDate()
+      return year.toString() + '-' + month.toString() + '-' + day.toString()
+    }
   },
   data() {
+    const { year, month, day } = this.nowDate()
   	return {
       title: 'Hello',
       info: [
@@ -68,13 +88,16 @@ export default {
         }
       ],
       newList: [],
-      chooseNum: ''
+      chooseNum: '',
+      year,
+      month,
+      day
   	}
   },
   async onLoad() {
     try {
       const newContent = await getNews()
-      this.newList = newContent
+      this.newList = newContent.slice(0, 10)
     } finally {
 
     }
@@ -106,6 +129,17 @@ export default {
       } finally {
 
       }
+    },
+    nowDate() {
+      const date = new Date()
+      const year = date.getFullYear()
+      const month = date.getMonth() + 1
+      const day = date.getDate()
+      return {
+        year,
+        month,
+        day
+      }
     }
   }
 }
@@ -125,8 +159,15 @@ export default {
   margin-top: 20upx;
 }
 
-.cricle-content {
-  border-bottom: 1px solid black;
-  margin-bottom: 10upx;
+.search-content {
+  border-bottom: 1upx solid black;
+  padding: 10upx;
+  margin: 20upx 10upx;
+}
+.article-card {
+  margin: 40upx 20upx;
+}
+.article-content {
+  font-size: 24upx;
 }
 </style>
