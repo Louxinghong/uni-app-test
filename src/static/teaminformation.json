@@ -1,0 +1,28 @@
+{
+  "content": [
+    {
+      "id": "0",
+      "teamShortName": "骑士",
+      "teamCompleteName": "克利夫兰骑士",
+      "teamArea": "克利夫兰",
+      "teamPartition": "东部",
+      "teamPicUrl": ""
+    },
+    {
+      "id": "1",
+      "teamShortName": "湖人",
+      "teamCompleteName": "洛杉矶湖人",
+      "teamArea": "洛杉矶",
+      "teamPartition": "西部",
+      "teamPicUrl": ""
+    },
+    {
+      "id": "2",
+      "teamShortName": "勇士",
+      "teamCompleteName": "金州勇士",
+      "teamArea": "金州",
+      "teamPartition": "西部",
+      "teamPicUrl": ""
+    }
+  ]
+}

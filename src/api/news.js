@@ -8,3 +8,6 @@ export const getNews = data =>
 
 export const getHupuNews = data =>
   ajax('http://route.showapi.com/967-1', 'get', data)
+
+export const getTeamInfo = data =>
+  ajax('http://localhost:8081/static/teaminformation.json', 'get', data)
