@@ -3,7 +3,7 @@
  * @type {object}
  */
 const defaultHeader = {
-  'ga-appname': 'YLZG'
+  'ga-appname': 'louxiaohong'
 }
 
 /**
