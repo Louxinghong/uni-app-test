@@ -8,6 +8,12 @@
       }
     },
     {
+      "path": "pages/home/newsDetail/newsDetail",
+      "style": {
+        "navigationBarTitleText": "新闻详情"
+      }
+    },
+    {
       "path": "pages/team/index",
       "style": {
         "navigationBarTitleText": "球队信息"

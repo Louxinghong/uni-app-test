@@ -19,7 +19,8 @@ const ajax = (url, method, data, header) =>
       url,
       method: method.toUpperCase(),
       data,
-      header: { ...defaultHeader, ...header },
+      // header: { ...defaultHeader, ...header },
+      header: { ...header },
       success: res => {
         resolve(res.data)
       },

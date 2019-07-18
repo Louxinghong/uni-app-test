@@ -1,44 +1,29 @@
 <template>
     <view>
-      <uni-segmented-control
-        class="model-change"
-        :current="current"
-        :values="items"
-        @clickItem="onClickItem"
-        style-type="button"
-        active-color="#6495ED"
-      ></uni-segmented-control>
-
-      <view class="content">
-        <view v-for="(item, index) in teamdata" :key="index">
-            <view v-if="item.teamPartition === '东部'" v-show="current === 0">
-              <uni-card
-                class="article-card"
-                :title="item.teamArea" 
-                thumbnail="http://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" 
-                extra="getNowDate"
-                note="NBA"
-              >
-                <text class="article-content">
-                  {{ item.teamCompleteName }}
-                </text>
-              </uni-card>
-            </view>
-            <view v-if="item.teamPartition === '西部'" v-show="current === 1">
-              <uni-card
-                class="article-card"
-                :title="item.teamArea" 
-                thumbnail="http://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" 
-                extra="getNowDate"
-                note="NBA"
-              >
-                <text class="article-content">
-                  {{ item.teamCompleteName }}
-                </text>
-              </uni-card>
-            </view>
-        </view>
+      <view class="control-content">
+        <uni-segmented-control
+          :current="current"
+          :values="items"
+          @clickItem="onClickItem"
+          style-type="button"
+          active-color="rgb(0, 122, 255)"
+        ></uni-segmented-control>
       </view>
+      
+      <view class="article-card" v-for="(item, index) in teamdata" :key="index">
+        <uni-card
+          :title="item.teamShortName" 
+          thumbnail="http://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" 
+          :extra="item.teamArea"
+          note="NBA"
+          v-show="item.currentTeam == current"
+        >
+          <text class="article-content">
+            {{ item.teamIntroduction.slice(0, 70) + '...' }}
+          </text>
+        </uni-card>
+      </view>
+      
     </view>
 </template>
 
@@ -70,17 +55,25 @@ export default {
       if(this.current != index) {
         this.current = index
       }
+    },
+    onClick(data) {
+      alert(data)
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.model-change {
-  margin-top: 20upx;
-  width: 500upx;
+.control-content {
+  position: sticky;
+  top: 65upx;
+  padding: 30upx 0upx;
+  border-bottom: 1px solid rgb(160, 158, 158);
+  z-index: 1;
+  background-color: #ffffff;
 }
 .article-card {
-  margin-top: 30upx;
+  margin: 30upx 0upx;
+  font-size: 30upx;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <view class="content">
+  <view>
     <view class="image-list">
       <uni-swiper-dot :info="info" :current="current" field="content" :mode="mode">
         <swiper class="swiper-box" @change="change" autoplay="true">
@@ -11,55 +11,33 @@
         </swiper>
       </uni-swiper-dot>
     </view>
-    
-    <view class="cont-content">
-      <uni-swipe-action @click="bindClick" :options="options">
-        <view class='cont'>向左滑动以查看效果</view>
-      </uni-swipe-action>
+
+    <view class="news-list">
+      <view class="news-body" v-for="(item, index) in listData" :key="index" @click="goDetail(item.id)">
+        <image class="news-image" :src="item.cover"></image>
+        <view class="news-content">
+          <view class="news-content-title">{{ item.title }}</view>
+          <view class="news-content-author-time">
+            <text>{{ item.author_name }}</text>
+            <text>{{ item.published_at }}</text>
+          </view>
+        </view>
+      </view>
     </view>
-
-    <input class="search-content" type="text" v-model="chooseNum" placeholder="请输入要查找的ID">
-    <button class="search-btn" type="primary" @click="getThisNews(chooseNum)">搜索</button>
-
-    <uni-card
-      class="article-card"
-      v-for="(item, index) in newList"
-      :title="item.title" 
-      thumbnail="http://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" 
-      :extra="getNowDate"
-      :note="username"
-      :key="index"
-    >
-      <text class="article-content">
-        {{ item.body }}
-      </text>
-    </uni-card>
   </view>
 </template>
 
 <script>
-import { uniSwiperDot, uniSwipeAction, uniCard } from '@dcloudio/uni-ui'
+import { uniSwiperDot } from '@dcloudio/uni-ui'
 import { setTimeout } from 'timers'
-import { getNews } from '@/api/news'
-import { mapState } from   'vuex'
+import { getDcloudNews } from '@/api/news'
 
 export default {
   components: {
-    uniSwiperDot,
-    uniSwipeAction,
-    uniCard
-  },
-  computed: {
-    ...mapState('login',['username']),
-    getNowDate() {
-      const { year, month, day} = this.nowDate()
-      return year.toString() + '-' + month.toString() + '-' + day.toString()
-    }
+    uniSwiperDot
   },
   data() {
-    const { year, month, day } = this.nowDate()
   	return {
-      title: 'Hello',
       info: [
         {
           content: '/static/my/one.jpg'
@@ -73,38 +51,20 @@ export default {
       ],
       current: 0,
       mode: 'long',
-      options: [
-        {
-          text: '取消',
-          style: {
-            backgroundColor: '#007aff'
-          }
-        },
-        {
-          text: '确认',
-          style: {
-            backgroundColor: '#dd524d'
-          }
-        }
-      ],
-      newList: [],
-      chooseNum: '',
-      year,
-      month,
-      day
+      maxId: '',
+      reload: false,
+      listData: [],
+      alreadyExisted: false,
+      newList: []
   	}
   },
   async onLoad() {
-    try {
-      const newContent = await getNews()
-      this.newList = newContent.slice(0, 10)
-    } finally {
-
-    }
-    
-    uni.startPullDownRefresh()
+    this.getList()
   },
   onPullDownRefresh() {
+    this.last_id = ''
+    this.reload = true
+    this.getList()
     setTimeout(() => {
       uni.stopPullDownRefresh()
     }, 1000)
@@ -113,39 +73,67 @@ export default {
     change(e) {
       this.current = e.detail.current
     },
-    bindClick(e) {
-      if(e.text === '确认'){
-        alert('123')
+    async getList() {
+      var data = {
+        time: '',
+        pageSize: ''
       }
-    },
-    async getThisNews(number) {
-      console.log(number)
-      try {
-        const data = {
-          id: number
-        }
-        this.newList = await getNews(data)
-        console.log(this.newList)
-      } finally {
 
+      data.time = new Date().getTime() + ''
+      data.pageSize = 50
+     
+      const newContent = await getDcloudNews(data)
+      if(this.listData.length == 0) {
+        this.listData = newContent
+      }
+      else {
+        for(let i = 0; i < newContent.length; i++) {
+          for(let j = 0; j < this.listData.length; j++) {
+            if(newContent[i].id == this.listData[j].id) {
+              this.alreadyExisted = true
+              break;
+            }
+          }
+          if(this.alreadyExisted == false) {
+            this.newList.push(newContent[i])
+          }
+        }
+        this.listData = this.newList.concat(this.listData)
       }
     },
-    nowDate() {
-      const date = new Date()
-      const year = date.getFullYear()
-      const month = date.getMonth() + 1
-      const day = date.getDate()
-      return {
-        year,
-        month,
-        day
+    goDetail(id) {
+      var detailData = {
+        id: '',
+        postId: '',
+        title: '',
+        authorName: '',
+        cover: '',
+        content: '',
+        publishedAt: ''
       }
+      this.listData.forEach(e => {
+        if(e.id == id) {
+          detailData = {
+            id: e.id,
+            postId: e.post_id,
+            title: e.title,
+            authorName: e.author_name,
+            cover: e.cover,
+            content: e.content,
+            publishedAt: e.published_at
+          }
+        }
+      })
+      
+      uni.navigateTo({
+        url: '/pages/home/newsDetail/newsDetail?data=' + encodeURIComponent(JSON.stringify(detailData))
+      })
     }
   }
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 .image-list {
   width: 100%;
   text-align: center;
@@ -154,20 +142,33 @@ export default {
   height: 300upx;
   width: 95%;
 }
-
-.cont-content {
-  margin-top: 20upx;
+.news-image {
+  width: 25%;
+  height: 140upx;
 }
-
-.search-content {
-  border-bottom: 1upx solid black;
-  padding: 10upx;
-  margin: 20upx 10upx;
+.news-body {
+  display: flex;
+  justify-content: space-around;
+  padding: 20upx;
+  border-bottom: 1upx solid #a5a4a4;
 }
-.article-card {
-  margin: 40upx 20upx;
+.news-content {
+  font-size: 30upx;
+  width: 75%;
+  display: flex;
+  flex-flow: column nowrap;
+  padding: 10upx 20upx;
 }
-.article-content {
-  font-size: 24upx;
+.news-content-title {
+  height: 84upx;
+  font-size: 28upx;
+  overflow: hidden;
+}
+.news-content-author-time {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: #949292;
+  font-size: 20upx;
 }
 </style>
