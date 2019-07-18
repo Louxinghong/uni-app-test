@@ -10,7 +10,7 @@ export const getHupuNews = data =>
   ajax('http://route.showapi.com/967-1', 'get', data)
 
 export const getTeamInfo = data =>
-  ajax('./static/teaminformation.json', 'get', data)
+  ajax('../static/teaminformation.json', 'get', data)
 
 export const getDcloudNews = data =>
   ajax('https://unidemo.dcloud.net.cn/api/news', 'get', data)
