@@ -11,7 +11,7 @@
     </view>
     
     <view class="detail-content">
-      <text  v-html="data.content"></text>
+      <rich-text :nodes="htmlContent"></rich-text>
     </view>
     
     
@@ -19,15 +19,23 @@
 </template>
 
 <script>
+import htmlParser from '@/utils/html-parser'
 export default {
   data() {
     return {
-      data: []
+      data: {},
+      htmlContent: []
     }
   },
   onLoad(event) {
-    this.data = JSON.parse(event.data)
-    console.log(this.data)
+    try {
+      this.data = JSON.parse(decodeURIComponent(event.data))
+    } catch (error) {
+      this.data = JSON.parse(event.data)
+    }
+    var htmlString = this.data.content.replace(/\\/g, "").replace(/<img/g, "<img style=\"width:100%;\"")
+    // console.log(this.data.content)
+    this.htmlContent = htmlParser(htmlString)
   }
 }
 </script>
@@ -53,5 +61,4 @@ export default {
   font-size: 30upx;
   padding: 0upx 20upx;
 }
-
 </style>
