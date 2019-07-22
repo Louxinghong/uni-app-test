@@ -66,7 +66,7 @@ export default {
 <style lang="scss" scoped>
 .control-content {
   position: sticky;
-  top: 0upx;
+  top: 88upx;
   padding: 30upx 0upx;
   border-bottom: 1px solid rgb(160, 158, 158);
   z-index: 1;
