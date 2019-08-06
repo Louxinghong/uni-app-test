@@ -5,7 +5,7 @@
         <swiper class="swiper-box" @change="change" autoplay="true">
           <swiper-item v-for="(item, index) in info" :key="index">
             <view>
-              <image class="img-content" :src="item.content"></image>
+              <image class="img-content" :src="item.cover"></image>
             </view>
           </swiper-item>
         </swiper>
@@ -38,17 +38,7 @@ export default {
   },
   data() {
   	return {
-      info: [
-        {
-          content: '/static/my/one.jpg'
-        }, 
-        {
-          content: '/static/my/two.jpg'
-        }, 
-        {
-          content: '/static/my/three.jpg'
-        }
-      ],
+      info: [],
       current: 0,
       mode: 'long',
       maxId: '',
@@ -100,6 +90,9 @@ export default {
         }
         this.listData = this.newList.concat(this.listData)
       }
+
+      this.info = this.listData.slice(0, 5)
+      console.log(this.info)
     },
     goDetail(id) {
       var detailData = {
