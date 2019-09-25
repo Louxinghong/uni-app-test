@@ -1,5 +1,8 @@
 # wx-my-test
-
+## Write something
+```
+个人书写的Uni-app。包含简单的页面，接口读取，用户登录，签到等功能。还在不断学习中
+```
 ## Project setup
 ```
 yarn install
