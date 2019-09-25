@@ -2,7 +2,7 @@
   <view class="user-info">
     <view class="person-info">
       <view class="per-con">
-        <img class="person-img" src="/static/tabbar/tab_ic_me_nor.png" alt="">
+        <image class="person-img" src="/static/my/ic_me.png" alt />
         <span v-if="!isLogin">未登录，请点击下方登录按钮前往登录</span>
         <span v-else>欢迎，{{ username }}</span>
       </view>
@@ -11,71 +11,71 @@
       <template v-if="!isLogin">
         <button class="login-btn" @click="onLogin">立即登录</button>
       </template>
-      <template v-else-if="!isApply"> 
+      <template v-else-if="!isApply">
         <button class="apply-btn" @click="onApply">立即申请</button>
-        <text class="apply-txt">您还未提交申请，暂无可用额度</text>
+        <text class="apply-txt">您还未提交申请，暂无可执教球队</text>
       </template>
       <template v-else>
         <view class="limit-info">
-          <text>可用额度(元)</text>
-          <text>80000.00</text>
-          <text>总额度 100,000.00</text>
+          <text>可用人数（人）</text>
+          <text>5</text>
+          <text>总人数 12</text>
         </view>
         <view class="upgrade-limit">
-          <text>我要提额</text>
-          <image src="/static/my/ic_me_tie_arrowright.png"></image>
+          <text>我要加人</text>
+          <image src="/static/my/ic_me_tie_arrowright.png" />
         </view>
       </template>
     </view>
 
     <view class="footer">
       <view class="footer-item">
-        <image src="/static/my/ic_me_list_myloan.png"></image>
-        <text>我的借款</text>
+        <image src="/static/my/ic_me_list_team.png" />
+        <text>我的球队</text>
       </view>
       <view class="footer-item">
-        <image src="/static/my/ic_me_list_myinfor.png" @click="toPersonInfo"></image>
+        <image src="/static/my/ic_me_list_myinfor.png" @click="toPersonInfo" />
         <text>个人信息</text>
       </view>
       <view class="footer-item">
-        <image src="/static/my/ic_me_list_manager.png"></image>
-        <text>客户经理</text>
+        <image src="/static/my/ic_me_list_myloan.png" />
+        <text>我的资产</text>
       </view>
     </view>
   </view>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from "vuex";
+
 export default {
   data() {
     return {
       isApply: false
-    }
+    };
   },
   computed: {
-    ...mapState('login', ['username', 'isLogin'])
+    ...mapState("login", ["username", "isLogin"])
   },
   methods: {
     onLogin() {
       uni.navigateTo({
-        url: '/pages/login/index'
-      })
+        url: "/pages/login/index"
+      });
     },
     onApply() {
-      this.isApply = true
+      this.isApply = true;
     },
     toPersonInfo() {
       uni.navigateTo({
-        url: '/pages/my/person/index'
-      })
+        url: "/pages/my/person/index"
+      });
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
-
 .user-info {
   display: flex;
   flex-flow: column nowrap;
@@ -103,7 +103,6 @@ export default {
         margin-right: 20upx;
       }
     }
-    
   }
 
   .content {
@@ -172,7 +171,7 @@ export default {
       align-items: center;
       width: 181upx;
       height: 46upx;
-      background: url('~@/static/my/img_me_btnbg.png');
+      background: url("~@/static/my/img_me_btnbg.png");
       background-size: 100% 100%;
 
       text {
@@ -208,5 +207,4 @@ export default {
     }
   }
 }
-
 </style>
