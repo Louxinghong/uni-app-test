@@ -8,6 +8,11 @@
         style-type="button"
         active-color="rgb(0, 122, 255)"
       ></uni-segmented-control>
+
+      <view v-show="current === 0">11111111111111111</view>
+      <view v-show="current === 1">
+        <input class="search" confirm-type="search" placeholder="请输入搜索内容" />
+      </view>
     </view>
   </view>
 </template>
@@ -23,7 +28,7 @@ export default {
   data () {
     return {
       teamdata: [],
-      items: ['搜索', '我的'],
+      items: ['我的', '发现'],
       current: 0
     };
   },
@@ -49,8 +54,12 @@ export default {
   position: sticky;
   top: 88upx;
   padding: 30upx 0upx;
-  border-bottom: 1px solid rgb(160, 158, 158);
   z-index: 1;
   background-color: #ffffff;
+
+  .search {
+    margin: 40upx;
+    border-bottom: 1px solid black;
+  }
 }
 </style>
