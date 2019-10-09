@@ -1,22 +1,22 @@
 {
   "pages": [
-  	{
-      "path": "pages/home/index",
+    {
+      "path": "pages/news/index",
       "style": {
         "enablePullDownRefresh": true,
         "navigationBarTitleText": "首页新闻"
       }
     },
     {
-      "path": "pages/home/newsDetail/newsDetail",
+      "path": "pages/news/newsDetail/newsDetail",
       "style": {
         "navigationBarTitleText": "新闻详情"
       }
     },
     {
-      "path": "pages/team/index",
+      "path": "pages/music/index",
       "style": {
-        "navigationBarTitleText": "球队信息"
+        "navigationBarTitleText": "我的音乐"
       }
     },
     {
@@ -44,13 +44,19 @@
         "navigationBarBackgroundColor": "#5CACEE",
         "navigationBarTextStyle": "white"
       }
+    },
+    {
+      "path": "pages/wechat-warrant/index",
+      "style": {
+        "navigationBarTitleText": "微信授权"
+      }
     }
   ],
   "globalStyle": {
-  	"navigationBarTextStyle": "black",
-  	"navigationBarTitleText": "我的小程序",
-  	"navigationBarBackgroundColor": "#F8F8F8",
-  	"backgroundColor": "#F8F8F8"
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "我的小程序",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
   },
   "tabBar": {
     "color": "#909090",
@@ -58,28 +64,28 @@
     "backgroundColor": "#fff",
     "list": [
       {
-        "pagePath": "pages/home/index",
-        "text": "首页",
-        "iconPath": "static/tabbar/tab_ic_home_nor.png",
-        "selectedIconPath": "static/tabbar/tab_ic_home_pre.png"
+        "pagePath": "pages/news/index",
+        "text": "新闻",
+        "iconPath": "static/tabbar/tab_ic_news.png",
+        "selectedIconPath": "static/tabbar/tab_ic_news_select.png"
       },
       {
-        "pagePath": "pages/team/index",
-        "text": "球队",
-        "iconPath": "static/tabbar/tab_ic_finance_nor.png",
-        "selectedIconPath": "static/tabbar/tab_ic_finance_pre.png"
+        "pagePath": "pages/music/index",
+        "text": "音乐",
+        "iconPath": "static/tabbar/tab_ic_music.png",
+        "selectedIconPath": "static/tabbar/tab_ic_music_select.png"
       },
       {
         "pagePath": "pages/memo/index",
         "text": "备忘",
-        "iconPath": "static/tabbar/tab_ic_bx_nor.png",
-        "selectedIconPath": "static/tabbar/tab_ic_bx_pre.png"
+        "iconPath": "static/tabbar/tab_ic_note.png",
+        "selectedIconPath": "static/tabbar/tab_ic_note_select.png"
       },
       {
         "pagePath": "pages/my/main/index",
         "text": "我的",
-        "iconPath": "static/tabbar/tab_ic_me_nor.png",
-        "selectedIconPath": "static/tabbar/tab_ic_me_pre.png"
+        "iconPath": "static/tabbar/tab_ic_person.png",
+        "selectedIconPath": "static/tabbar/tab_ic_person_select.png"
       }
     ]
   }

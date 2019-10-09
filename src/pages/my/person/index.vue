@@ -7,7 +7,12 @@
 
 <script>
 export default {
-
+  name: 'PersonInfo',
+  data () {
+    return {
+      
+    }
+  }
 }
 </script>
 

@@ -2,7 +2,7 @@
   <view class="user-info">
     <view class="person-info">
       <view class="per-con">
-        <image class="person-img" src="/static/my/ic_me.png" alt />
+        <image class="person-img" src="/static/my/ic_me.png" alt></image>
         <span v-if="!isLogin">未登录，请点击下方登录按钮前往登录</span>
         <span v-else>欢迎，{{ username }}</span>
       </view>
@@ -22,23 +22,23 @@
           <text>总人数 12</text>
         </view>
         <view class="upgrade-limit">
-          <text>我要加人</text>
-          <image src="/static/my/ic_me_tie_arrowright.png" />
+          <text @click="onGoWeChat">我要加人</text>
+          <image src="/static/my/ic_me_tie_arrowright.png"></image>
         </view>
       </template>
     </view>
 
     <view class="footer">
       <view class="footer-item">
-        <image src="/static/my/ic_me_list_team.png" />
+        <image src="/static/my/ic_me_list_team.png"></image>
         <text>我的球队</text>
       </view>
       <view class="footer-item">
-        <image src="/static/my/ic_me_list_myinfor.png" @click="toPersonInfo" />
+        <image src="/static/my/ic_me_list_myinfor.png" @click="toPersonInfo"></image>
         <text>个人信息</text>
       </view>
       <view class="footer-item">
-        <image src="/static/my/ic_me_list_myloan.png" />
+        <image src="/static/my/ic_me_list_myloan.png"></image>
         <text>我的资产</text>
       </view>
     </view>
@@ -46,29 +46,34 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from 'vuex'
 
 export default {
-  data() {
+  data () {
     return {
       isApply: false
     };
   },
   computed: {
-    ...mapState("login", ["username", "isLogin"])
+    ...mapState('login', ['username', 'isLogin'])
   },
   methods: {
-    onLogin() {
+    onLogin () {
       uni.navigateTo({
-        url: "/pages/login/index"
+        url: '/pages/login/index'
       });
     },
-    onApply() {
+    onApply () {
       this.isApply = true;
     },
-    toPersonInfo() {
+		onGoWeChat () {
+			uni.navigateTo({
+			  url: '/pages/wechat-warrant/index'
+			});
+		},
+    toPersonInfo () {
       uni.navigateTo({
-        url: "/pages/my/person/index"
+        url: '/pages/my/person/index'
       });
     }
   }
@@ -87,7 +92,7 @@ export default {
     height: 270upx;
     flex-flow: row nowrap;
     align-items: baseline;
-    background: crimson;
+    background: linear-gradient(to bottom, crimson, #ffffff);
     color: white;
     font-size: 25upx;
 
@@ -115,7 +120,8 @@ export default {
     height: 258upx;
     margin-top: 120upx;
     margin-bottom: 20upx;
-    background: linear-gradient(to right, #fc9343, #fc5d55);
+    // background: linear-gradient(to right, #ffffff, crimson);
+		background: crimson;
     box-shadow: 0upx 10upx 16upx 0upx rgba(252, 121, 65, 0.4);
     border-radius: 8upx;
     left: 50%;
@@ -130,11 +136,10 @@ export default {
       border-radius: 40upx;
     }
 
-    .login-txt,
     .apply-txt {
       margin-top: 10upx;
       color: white;
-      font-size: 15upx;
+      font-size: 20upx;
     }
 
     .limit-info {

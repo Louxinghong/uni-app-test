@@ -2,15 +2,15 @@
   <view class="content">
     <view class="input-box">
       <span class="input-title">帐号</span>
-      <input class="input-content" placeholder="请输入账号" type="text" v-model="username">
+      <input class="input-content" placeholder="请输入账号" type="text" v-model="username" />
     </view>
-    <hr>
+    <hr />
 
     <view class="input-box">
       <span class="input-title">密码</span>
-      <input class="input-content" placeholder="请输入密码" password type="text" v-model="password">
+      <input class="input-content" placeholder="请输入密码" password type="text" v-model="password" />
     </view>
-    <hr>
+    <hr />
 
     <view class="register-forgetword">
       <span>注册</span>
@@ -22,13 +22,13 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      username: '',
-      password: ''
-    }
+      username: "",
+      password: ""
+    };
   },
 
   methods: {
@@ -36,31 +36,29 @@ export default {
       changeLogin: 'changeLoginStatus',
       getusername: 'getUserName'
     }),
-    onLogin() {
-      if(this.username === '') {
+    onLogin () {
+      if (this.username === "") {
         uni.showToast({
           icon: 'none',
           title: '手机号不能为空',
           duration: 2000
         });
-      }
-      else if(this.password === '') {
+      } else if (this.password === "") {
         uni.showToast({
           icon: 'none',
           title: '密码不能为空',
           duration: 2000
-        })
-      }
-      else {
-        this.changeLogin()
-        this.getusername({username: this.username})
+        });
+      } else {
+        this.changeLogin();
+        this.getusername({ username: this.username });
         uni.reLaunch({
           url: '/pages/my/main/index'
-        })
+        });
       }
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -103,9 +101,4 @@ export default {
     font-size: 28upx;
   }
 }
-
-
-
-
-
 </style>

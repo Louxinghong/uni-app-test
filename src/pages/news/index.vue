@@ -2,7 +2,7 @@
   <view>
     <view class="image-list">
       <uni-swiper-dot :info="info" :current="current" field="content" :mode="mode">
-        <swiper class="swiper-box" @change="change" autoplay="true">
+        <swiper class="swiper-box" @change="change" :autoplay="true">
           <swiper-item v-for="(item, index) in info" :key="index">
             <view>
               <image class="img-content" :src="item.cover"></image>
@@ -36,7 +36,7 @@ export default {
   components: {
     uniSwiperDot
   },
-  data() {
+  data () {
   	return {
       info: [],
       current: 0,
@@ -45,13 +45,14 @@ export default {
       reload: false,
       listData: [],
       alreadyExisted: false,
-      newList: []
+      newList: [],
+      indicatorDots: true
   	}
   },
-  async onLoad() {
+  async onLoad () {
     this.getList()
   },
-  onPullDownRefresh() {
+  onPullDownRefresh () {
     this.last_id = ''
     this.reload = true
     this.getList()
@@ -60,10 +61,10 @@ export default {
     }, 1000)
   },
   methods: {
-    change(e) {
+    change (e) {
       this.current = e.detail.current
     },
-    async getList() {
+    async getList () {
       var data = {
         time: '',
         pageSize: ''
@@ -92,9 +93,8 @@ export default {
       }
 
       this.info = this.listData.slice(0, 5)
-      console.log(this.info)
     },
-    goDetail(id) {
+    goDetail (id) {
       var detailData = {
         id: '',
         postId: '',
@@ -119,7 +119,7 @@ export default {
       })
       
       uni.navigateTo({
-        url: '/pages/home/newsDetail/newsDetail?data=' + encodeURIComponent(JSON.stringify(detailData))
+        url: '/pages/news/newsDetail/newsDetail?data=' + encodeURIComponent(JSON.stringify(detailData))
       })
     }
   }

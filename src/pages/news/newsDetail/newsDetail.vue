@@ -21,13 +21,13 @@
 <script>
 import htmlParser from '@/utils/html-parser'
 export default {
-  data() {
+  data () {
     return {
       data: {},
       htmlContent: []
     }
   },
-  onLoad(event) {
+  onLoad (event) {
     try {
       this.data = JSON.parse(decodeURIComponent(event.data))
     } catch (error) {

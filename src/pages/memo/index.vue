@@ -52,19 +52,19 @@ export default {
     }
   },
   watch: {
-    checkDays() {
+    checkDays () {
       const { year, month } = this.getTime()
       this.thisMonthDays = this.getThisMonthDays(year, month)
     }
   },
   methods: {
-    change(e) {
+    change (e) {
       console.log(e)
     },
-    toClick(e) {
+    toClick (e) {
       console.log(e)
     },
-    getTime() {
+    getTime () {
       const date = new Date()
       const year = date.getFullYear()
       const month = date.getMonth() + 1
@@ -78,7 +78,7 @@ export default {
         day
       }
     },
-    getThisMonthDays(year, month) {
+    getThisMonthDays (year, month) {
       const thisMonthFirstDay = new Date(`${year}/${month}/1`)
       const firstDayWeek = thisMonthFirstDay.getDay()
       const thisMonth = new Date(year, month, 0)
@@ -86,24 +86,24 @@ export default {
       const day = [...this.getEmptys(firstDayWeek), ...this.getDays(thisMonthAllDays)]
       return day
     },
-    getEmptys(count) {
+    getEmptys (count) {
       let arr = []
       for (let i = 0; i < count; i++) {
         arr.push('')
       }
       return arr
     },
-    getDays(count) {
+    getDays (count) {
       let days = []
       for (let i = 1; i <= count; i++) {
         days.push(i)
       }
       return days
     },
-    format(data) {
+    format (data) {
       return data >=10 ? data : `0${data}`
     },
-    onCheck(day) {
+    onCheck (day) {
       this.checkDays.push(day)
       uni.showToast({
         icon: 'none',
