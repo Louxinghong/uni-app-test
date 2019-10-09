@@ -34,15 +34,15 @@ export default {
   },
   async onLoad () {
     try {
-      const data = await getTeamInfo();
-      this.teamdata = data.content;
+      const data = await getTeamInfo()
+      this.teamdata = data.content
     } finally {
     }
   },
   methods: {
     onClickItem (index) {
       if (this.current != index) {
-        this.current = index;
+        this.current = index
       }
     }
   }

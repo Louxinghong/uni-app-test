@@ -2,7 +2,7 @@
   <view class="user-info">
     <view class="person-info">
       <view class="per-con">
-        <image class="person-img" src="/static/my/ic_me.png" alt></image>
+        <image class="person-img" src="/static/my/ic_me.png"></image>
         <span v-if="!isLogin">未登录，请点击下方登录按钮前往登录</span>
         <span v-else>欢迎，{{ username }}</span>
       </view>
