@@ -11,3 +11,6 @@ export const getHupuNews = data =>
 
 export const getTeamInfo = data =>
   ajax('http://localhost:8081/static/teaminformation.json', 'get', data)
+
+export const getDcloudNews = data =>
+  ajax('https://unidemo.dcloud.net.cn/api/news', 'get', data)
