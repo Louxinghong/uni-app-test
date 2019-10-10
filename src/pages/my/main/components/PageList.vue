@@ -12,14 +12,14 @@
 </template>
 
 <script>
-import { uniList, uniListItem } from "@dcloudio/uni-ui";
+import { uniList, uniListItem } from '@dcloudio/uni-ui'
 
 export default {
   components: {
     uniList,
     uniListItem
   }
-};
+}
 </script>
 
 <style lang="scss">

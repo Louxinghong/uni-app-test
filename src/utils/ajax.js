@@ -21,6 +21,7 @@ const ajax = (url, method, data, header) =>
       data,
       // header: { ...defaultHeader, ...header },
       header: { ...header },
+      timeout: 15000,
       success: res => {
         resolve(res.data)
       },

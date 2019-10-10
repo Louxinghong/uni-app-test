@@ -1,7 +1,7 @@
 <template>
   <view>
-    <user-info></user-info>
-    <page-list></page-list>
+    <UserInfo></UserInfo>
+    <PageList></PageList>
   </view>
 </template>
 
@@ -18,5 +18,4 @@ export default {
 </script>
 
 <style>
-
 </style>

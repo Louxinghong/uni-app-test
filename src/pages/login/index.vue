@@ -22,13 +22,14 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions } from 'vuex'
+
 export default {
-  data() {
+  data () {
     return {
-      username: "",
-      password: ""
-    };
+      username: '',
+      password: ''
+    }
   },
 
   methods: {
@@ -42,23 +43,23 @@ export default {
           icon: 'none',
           title: '手机号不能为空',
           duration: 2000
-        });
+        })
       } else if (this.password === "") {
         uni.showToast({
           icon: 'none',
           title: '密码不能为空',
           duration: 2000
-        });
+        })
       } else {
         this.changeLogin();
-        this.getusername({ username: this.username });
+        this.getusername({ username: this.username })
         uni.reLaunch({
           url: '/pages/my/main/index'
-        });
+        })
       }
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

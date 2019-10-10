@@ -52,7 +52,7 @@ export default {
   data () {
     return {
       isApply: false
-    };
+    }
   },
   computed: {
     ...mapState('login', ['username', 'isLogin'])
@@ -61,7 +61,7 @@ export default {
     onLogin () {
       uni.navigateTo({
         url: '/pages/login/index'
-      });
+      })
     },
     onApply () {
       this.isApply = true;
@@ -69,15 +69,15 @@ export default {
 		onGoWeChat () {
 			uni.navigateTo({
 			  url: '/pages/wechat-warrant/index'
-			});
+			})
 		},
     toPersonInfo () {
       uni.navigateTo({
         url: '/pages/my/person/index'
-      });
+      })
     }
   }
-};
+}
 </script>
 
 <style lang="scss">
