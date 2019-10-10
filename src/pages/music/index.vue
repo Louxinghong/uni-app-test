@@ -15,7 +15,7 @@
           <text>{{playingMusic.name}}</text>
           <view class="play-time">
             <span>{{currentTime}}</span>
-            <progress percent="60" active stroke-width="3" />
+            <progress :percent="progress" active active-mode="forwards" stroke-width="3" />
             <span>{{durationTime}}</span>
           </view>
         </view>
@@ -45,7 +45,9 @@ export default {
     return {
       items: ['我的', '发现'],
       whichSelected: 0,
+      currentTime: 0,
       durationTime: 0,
+      progress: 0,
       innerAudioContext: {}
     }
   },
@@ -55,12 +57,6 @@ export default {
     },
     changeStatus () {
       return this.$store.state.music.changeMusicNums
-    },
-    currentTime () {
-      if (JSON.stringify(this.innerAudioContext) !== '{}') {
-        return this.innerAudioContext.currentTime
-      }
-      return 0
     }
   },
   watch: {
@@ -68,6 +64,7 @@ export default {
       handler: function (val) {
         if (val !== 0) {
           if (JSON.stringify(this.innerAudioContext) !== '{}') {
+            this.currentTime = 0
             this.innerAudioContext.destroy()
           }
 
@@ -75,38 +72,33 @@ export default {
           this.innerAudioContext.autoplay = true
           this.innerAudioContext.src = 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/audio/music.mp3'
           this.innerAudioContext.onPlay(() => {
-            // console.log(innerAudioContext)
             console.log('开始播放')
-            this.durationTime = this.innerAudioContext.duration
+            setInterval(() => {
+              this.currentTime++
+              this.progress = (this.currentTime / this.durationTime).toFixed(2) * 100
+              console.log(this.progress)
+            },10)
+            this.durationTime = this.innerAudioContext.duration.toFixed(0)
           })
-          // innerAudioContext.onStop(() => {
-          //   console.log('i am onStop')
-          //   innerAudioContext.stop()
-          //   //播放停止，销毁该实例
-          //   innerAudioContext.destroy()
-          // })
-          // innerAudioContext.onEnded(() => {
-          //   console.log('i am onEnded')
-          //   //播放结束，销毁该实例
-          //   innerAudioContext.destroy()
-          //   console.log('已执行destory()')
-          // })
           this.innerAudioContext.onError((res) => {
             console.log(res.errMsg)
             console.log(res.errCode)
-            // innerAudioContext.destroy()
           })
         }
         
       },
       immediate: true
-    }
+    },
+
   },
   methods: {
     onClickItem (index) {
       if (this.whichSelected != index) {
         this.whichSelected = index
       }
+    },
+    formatterTime (time) {
+      //TODO 时间转换
     }
   }
 }
