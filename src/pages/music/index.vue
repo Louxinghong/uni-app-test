@@ -14,9 +14,9 @@
         <view class="play-name">
           <text>{{playingMusic.name}}</text>
           <view class="play-time">
-            <span>{{currentTime}}</span>
+            <span>{{formatterCurrentTime(currentTime)}}</span>
             <progress :percent="progress" active active-mode="forwards" stroke-width="3" />
-            <span>{{durationTime}}</span>
+            <span>{{formatterDurationTime(durationTime)}}</span>
           </view>
         </view>
       </view>
@@ -48,7 +48,8 @@ export default {
       currentTime: 0,
       durationTime: 0,
       progress: 0,
-      innerAudioContext: {}
+      innerAudioContext: {},
+      time: ''
     }
   },
   computed: {
@@ -63,7 +64,9 @@ export default {
     changeStatus: {
       handler: function (val) {
         if (val !== 0) {
+          console.log(310/60)
           if (JSON.stringify(this.innerAudioContext) !== '{}') {
+            clearInterval(this.time)
             this.currentTime = 0
             this.innerAudioContext.destroy()
           }
@@ -71,15 +74,7 @@ export default {
           this.innerAudioContext = uni.createInnerAudioContext()
           this.innerAudioContext.autoplay = true
           this.innerAudioContext.src = 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/audio/music.mp3'
-          this.innerAudioContext.onPlay(() => {
-            console.log('开始播放')
-            setInterval(() => {
-              this.currentTime++
-              this.progress = (this.currentTime / this.durationTime).toFixed(2) * 100
-              console.log(this.progress)
-            },10)
-            this.durationTime = this.innerAudioContext.duration.toFixed(0)
-          })
+          this.onPlay()
           this.innerAudioContext.onError((res) => {
             console.log(res.errMsg)
             console.log(res.errCode)
@@ -89,16 +84,48 @@ export default {
       },
       immediate: true
     },
-
+    currentTime: {
+      handler: function (val) {
+        if ((val / 100).toFixed(0) === this.durationTime) {
+          clearInterval(this.time)
+        }
+      }
+    }
   },
   methods: {
     onClickItem (index) {
-      if (this.whichSelected != index) {
+      if (this.whichSelected !== index) {
         this.whichSelected = index
       }
     },
-    formatterTime (time) {
-      //TODO 时间转换
+    onPlay () {
+      const speed = 10
+      this.innerAudioContext.onPlay(() => {
+        this.durationTime = this.innerAudioContext.duration.toFixed(0)
+        this.time = setInterval(() => {
+          this.currentTime++
+          this.progress = ((this.currentTime / 100) / this.durationTime).toFixed(2) * 100
+        },speed)
+      })
+    },
+    formatterCurrentTime (time) {
+      const transTime = (time / 100).toFixed(0)
+      if (transTime < 60) {
+        return '00:' + (transTime < 10 ? '0' + transTime : transTime)
+      }
+      if (transTime >= 60) {
+        const secondTime = (transTime / 60).toFixed(0)
+        return (secondTime < 10 ? '0' + secondTime : secondTime) + ':' + (transTime - 60 * secondTime)
+      }
+    },
+    formatterDurationTime (time) {
+      if (time < 60) {
+        return '00:' + (time < 10 ? '0' + time : time)
+      }
+      if (time >= 60) {
+        const secondTime = (time / 60).toFixed(0)
+        return (secondTime < 10 ? '0' + secondTime : secondTime) + ':' + (time - 60 * secondTime)
+      }
     }
   }
 }
