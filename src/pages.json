@@ -20,9 +20,9 @@
       }
     },
     {
-      "path": "pages/memo/index",
+      "path": "pages/wether/index",
       "style": {
-        "navigationBarTitleText": "备忘信息"
+        "navigationBarTitleText": "天气预报"
       }
     },
     {
@@ -76,10 +76,10 @@
         "selectedIconPath": "static/tabbar/tab_ic_music_select.png"
       },
       {
-        "pagePath": "pages/memo/index",
-        "text": "备忘",
-        "iconPath": "static/tabbar/tab_ic_note.png",
-        "selectedIconPath": "static/tabbar/tab_ic_note_select.png"
+        "pagePath": "pages/wether/index",
+        "text": "天气",
+        "iconPath": "static/tabbar/tab_ic_wether.png",
+        "selectedIconPath": "static/tabbar/tab_ic_wether_select.png"
       },
       {
         "pagePath": "pages/my/main/index",
