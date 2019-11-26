@@ -26,6 +26,12 @@
       }
     },
     {
+      "path": "pages/wether/wetherDetail/index",
+      "style": {
+        "navigationBarTitleText": "天气详情"
+      }
+    },
+    {
       "path": "pages/my/main/index",
       "style": {
         "navigationBarTitleText": "个人页面"
