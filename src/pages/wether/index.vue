@@ -123,6 +123,11 @@ export default {
         display: flex;
         flex-flow: column nowrap;
       }
+
+      &:hover {
+        color: #ffffff;
+        background-color: rgb(139, 138, 138);
+      }
     }
   }
 }
